@@ -1,8 +1,8 @@
-# 🍕 Pizza Delivery App (Backend)
+#  Pizza Delivery App (Backend)
 
 A REST API for a pizza delivery application built using Node.js, Express, and MongoDB.
 
-## 🚀 Features
+##  Features
 - User authentication (JWT)
 - Role-based access (Admin / User)
 - CRUD operations for pizzas
@@ -10,14 +10,14 @@ A REST API for a pizza delivery application built using Node.js, Express, and Mo
 - View user orders
 - Secure routes with middleware
 
-## 🛠 Tech Stack
+##  Tech Stack
 - Node.js
 - Express.js
 - MongoDB + Mongoose
 - JWT Authentication
 - Postman (API testing)
 
-## 📦 API Endpoints
+##  API Endpoints
 
 ### Auth
 - POST /api/auth/register
