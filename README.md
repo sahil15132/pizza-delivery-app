@@ -33,5 +33,4 @@ A REST API for a pizza delivery application built using Node.js, Express, and Mo
 - POST /api/orders
 - GET /api/orders/my
 
-npm install
-npm run dev
+
