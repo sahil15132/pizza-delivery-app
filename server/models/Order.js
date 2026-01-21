@@ -5,29 +5,23 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     pizzas: [
       {
         pizza: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Pizza"
+          ref: "Pizza",
         },
-        quantity: {
-          type: Number,
-          default: 1
-        }
-      }
+        quantity: Number,
+      },
     ],
-    totalPrice: {
-      type: Number,
-      required: true
-    },
+    totalPrice: Number,
     status: {
       type: String,
-      enum: ["pending", "preparing", "delivered"],
-      default: "pending"
-    }
+      default: "Preparing",
+      enum: ["Preparing", "Baking", "Out for delivery", "Delivered"],
+    },
   },
   { timestamps: true }
 );

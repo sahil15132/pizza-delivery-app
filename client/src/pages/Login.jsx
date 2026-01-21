@@ -26,8 +26,9 @@ function Login() {
         return;
       }
 
-      // 🔑 VERY IMPORTANT
+      
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       alert("✅ Login successful");
       navigate("/");

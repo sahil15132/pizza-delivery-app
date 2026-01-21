@@ -2,59 +2,71 @@ import { useEffect, useState } from "react";
 
 function MyOrders() {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          console.log("No token found");
-          setLoading(false);
-          return;
-        }
-
-        const res = await fetch("http://localhost:5000/api/orders/my", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = await res.json();
-
-        if (Array.isArray(data)) {
-          setOrders(data);
-        } else {
-          setOrders([]);
-        }
-      } catch (err) {
-        console.error(err);
-        setOrders([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchOrders();
   }, []);
 
-  if (loading) return <p>Loading orders...</p>;
+  const fetchOrders = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/orders/my", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setOrders(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
-    <div>
+    <div style={{ marginTop: "30px" }}>
       <h2>📦 My Orders</h2>
 
-      {orders.length === 0 ? (
-        <p>No orders yet</p>
-      ) : (
-        orders.map((order) => (
-          <div key={order._id} style={{ marginBottom: "10px" }}>
-            <p>Total: ₹{order.totalPrice}</p>
-            <p>Status: {order.status}</p>
-          </div>
-        ))
-      )}
+      {orders.length === 0 && <p>No orders yet</p>}
+
+      {orders.map((order) => (
+        <div
+          key={order._id}
+          style={{
+            border: "1px solid gray",
+            padding: "15px",
+            marginBottom: "15px",
+            borderRadius: "8px",
+          }}
+        >
+          <p>
+            <b>Status:</b>{" "}
+            <span
+              style={{
+                color: order.status === "pending" ? "orange" : "green",
+                fontWeight: "bold",
+              }}
+            >
+              {order.status.toUpperCase()}
+            </span>
+          </p>
+
+          <p><b>Total:</b> ₹{order.totalPrice}</p>
+
+          <ul>
+            {order.pizzas.map((item, index) => (
+              <li key={index}>
+                {item.pizza.name} × {item.quantity}
+              </li>
+            ))}
+          </ul>
+
+          <small>
+            Ordered on: {new Date(order.createdAt).toLocaleString()}
+          </small>
+        </div>
+      ))}
     </div>
   );
 }
