@@ -44,7 +44,7 @@ function ManageOrders() {
               <tr key={order._id} style={{ borderBottom: '1px solid #333', textAlign: 'center' }}>
                 <td style={{ padding: '15px' }}>{order._id.slice(-6)}</td>
                 <td>{order.user?.name}</td>
-                <td>{order.items.length} Pizzas</td>
+                <td>{order.items?.length ?? 0} Pizzas</td>
                 <td className="price">₹{order.totalPrice}</td>
                 <td>
                   <select 

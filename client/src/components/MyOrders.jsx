@@ -55,9 +55,9 @@ function MyOrders() {
           <p><b>Total:</b> ₹{order.totalPrice}</p>
 
           <ul>
-            {order.pizzas.map((item, index) => (
+            {order.items?.map((item, index) => (
               <li key={index}>
-                {item.pizza.name} × {item.quantity}
+                {item.pizza?.name} × {item.quantity}
               </li>
             ))}
           </ul>

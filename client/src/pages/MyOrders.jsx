@@ -108,7 +108,7 @@ function MyOrders() {
           <hr />
 
           <b>Pizzas:</b>
-          {order.pizzas.map((item, index) => (
+          {order.items?.map((item, index) => (
             <p key={index}>
               🍕 {item.pizza?.name} × {item.quantity}
             </p>

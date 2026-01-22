@@ -19,7 +19,7 @@ function Navbar({ user, setUser, cartCount }) {
         
         {user ? (
           <>
-            {user.role === "admin" && <Link to="/admin-dashboard">Admin</Link>}
+            {user.role === "admin" && <Link to="/admin">Admin</Link>}
             <span className="user-name">Hi, {user?.name?.split(' ')[0] || 'User'}</span>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </>

@@ -5,40 +5,19 @@ import axios from "axios";
 function AdminDashboard() {
   const [stats, setStats] = useState({ totalRevenue: 0, totalOrders: 0 });
 
+  const fetchStats = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.get("http://localhost:5000/api/admin/stats", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setStats(res.data || { totalRevenue: 0, totalOrders: 0 });
+    } catch (err) {
+      console.error("Error fetching admin stats:", err);
+    }
+  };
+
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/admin/stats", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setStats(res.data);
-      } catch (err) {
-        console.error("Error fetching stats", err);
-      }
-      // Add this inside your AdminDashboard function
-const fetchStats = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await axios.get("http://localhost:5000/api/admin/stats", {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    setStats(res.data);
-  } catch (err) {
-    console.error("Error fetching admin stats:", err);
-  }
-};
-
-// Update your useEffect to use this function
-useEffect(() => {
-  fetchStats();
-}, []); 
-
-// Add a manual refresh button in your JSX
-<button onClick={fetchStats} className="submit-btn" style={{width: 'auto', padding: '5px 15px'}}>
-  Update Stats 🔄
-</button>
-    };
     fetchStats();
   }, []);
 
@@ -54,6 +33,12 @@ useEffect(() => {
 
       <h1 className="main-title">Admin Control Panel 🛠️</h1>
       
+      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginBottom: '20px' }}>
+        <button onClick={fetchStats} className="submit-btn" style={{width: 'auto', padding: '8px 16px'}}>
+          Refresh Stats 🔄
+        </button>
+      </div>
+
       <div className="pizza-grid">
         <div className="pizza-card" style={{ padding: '20px', textAlign: 'center' }}>
           <h3>Total Revenue</h3>

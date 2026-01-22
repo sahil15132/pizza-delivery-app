@@ -10,7 +10,7 @@ function AdminOrders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const res = await fetch("http://localhost:5000/api/admin/orders", { // <-- admin endpoint
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -19,30 +19,27 @@ function AdminOrders() {
       const data = await res.json();
       setOrders(data);
     } catch (err) {
-      console.error(err);
+      console.error("Fetch admin orders error:", err);
     }
   };
 
-const updateStatus = async (orderId, status) => {
-  try {
-    await fetch(
-      `http://localhost:5000/api/orders/${orderId}/status`,
-      {
-        method: "PUT", 
+  const updateStatus = async (orderId, status) => {
+    try {
+      // call admin patch endpoint
+      await fetch(`http://localhost:5000/api/admin/orders/${orderId}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ status }),
-      }
-    );
+      });
 
-    fetchOrders();
-  } catch (err) {
-    console.error(err);
-  }
-};
-
+      fetchOrders();
+    } catch (err) {
+      console.error("Update status error:", err);
+    }
+  };
 
   const statusColor = (status) => {
     switch (status) {
@@ -95,8 +92,8 @@ const updateStatus = async (orderId, status) => {
           <p><b>Total:</b> ₹{order.totalPrice}</p>
 
           <ul>
-            {order.pizzas.map((p) => (
-              <li key={p._id}>
+            {order.items?.map((p, idx) => (
+              <li key={p._id ?? idx}>
                 {p.pizza?.name} × {p.quantity}
               </li>
             ))}

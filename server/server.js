@@ -15,11 +15,13 @@ const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const pizzaRoutes = require("./routes/pizza.routes");
 const orderRoutes = require("./routes/order.routes");
+const adminRoutes = require("./routes/admin.routes"); // <-- add this
 
 app.use("/api/orders", orderRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/pizzas", pizzaRoutes);
+app.use("/api/admin", adminRoutes); // <-- mount admin routes here
 
 // Test Route
 app.get("/", (req, res) => {
