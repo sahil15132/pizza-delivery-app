@@ -1,34 +1,41 @@
+import axios from "axios";
+
 function PizzaCard({ pizza, cart, setCart }) {
   const addToCart = () => {
-    const existing = cart.find((item) => item._id === pizza._id);
+    // Check if pizza is already in cart
+    const exists = cart.find((item) => item._id === pizza._id);
 
-    if (existing) {
+    if (exists) {
+      // If it exists, increase quantity
       setCart(
         cart.map((item) =>
-          item._id === pizza._id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item._id === pizza._id ? { ...exists, quantity: exists.quantity + 1 } : item
         )
       );
     } else {
+      // If new, add to cart with quantity 1
       setCart([...cart, { ...pizza, quantity: 1 }]);
     }
+    alert(`${pizza.name} added to cart!`);
   };
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "10px", width: "220px" }}>
-      <img
-        src={pizza.image}
-        alt={pizza.name}
-        style={{ width: "100%", height: "140px", objectFit: "cover" }}
-      />
+  <div className="pizza-card">
+    <div className="pizza-image-wrapper">
+      <img src={pizza.image} alt={pizza.name} />
+    </div>
+    <div className="pizza-info">
       <h3>{pizza.name}</h3>
       <p>{pizza.description}</p>
-      <p><b>₹{pizza.price}</b></p>
-
-      <button onClick={addToCart}>Add to Cart</button>
+      <div className="pizza-price-action">
+        <span className="price">₹{pizza.price}</span>
+        <button className="add-btn" onClick={() => addToCart(pizza)}>
+          Add To Cart
+        </button>
+      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default PizzaCard;

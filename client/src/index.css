@@ -1,68 +1,319 @@
+/* 1. Reset & Global Variables */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --primary: #ff9800;
+  --dark-bg: #0f1111;
+  --card-bg: #1a1a1a;
+  --text-main: #ffffff;
+  --text-dim: #aaaaaa;
 }
 
 body {
-  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* 2. Layout Centering (Fixes the "Squashed" look) */
+.auth-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh; /* Keeps it centered vertically */
+  padding: 20px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.auth-card {
+  background-color: var(--card-bg);
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* 3. Form Styling */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left; /* Ensures labels aren't floating weirdly */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background-color: #252525;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: white;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* NAVBAR CONTAINER */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 8%;
+  background-color: #121212;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 80px;
+}
+
+/* LOGO */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ff9800;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* NAV LINKS GROUP */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff9800;
+}
+
+/* SPECIAL ADMIN LINK */
+.admin-link {
+  color: #ff9800 !important;
+  border: 1px solid #ff9800;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.admin-link:hover {
+  background: #ff9800;
+  color: #000 !important;
+}
+
+/* USER INFO & LOGOUT */
+.user-name {
+  color: #aaa;
+  font-size: 0.9rem;
+  border-left: 1px solid #444;
+  padding-left: 20px;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 5%;
   }
-  a:hover {
-    color: #747bff;
+  .nav-links {
+    gap: 15px;
   }
-  button {
-    background-color: #f9f9f9;
+  .user-name {
+    display: none; /* Hide name on mobile to save space */
   }
+}
+
+/* src/App.css or src/index.css */
+
+/* THE MAIN WRAPPER */
+.pizza-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.main-title {
+  text-align: center;
+  font-size: 2.8rem;
+  color: #ff9800;
+  margin-bottom: 40px;
+  font-weight: 800;
+}
+
+/* THE GRID */
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+/* THE PIZZA CARD */
+.pizza-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pizza-card:hover {
+  transform: translateY(-10px);
+  border-color: #ff9800;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.pizza-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.pizza-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fixes squashed images */
+}
+
+.pizza-info {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.pizza-price-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #333;
+}
+
+/* INDIVIDUAL PIZZA CARD */
+.pizza-card {
+  background: #1a1a1a;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #333;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pizza-card:hover {
+  transform: translateY(-10px);
+  border-color: #ff9800;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* IMAGE FIX - Prevents squashing */
+.pizza-image-wrapper {
+  width: 100%;
+  height: 200px;
+  background-color: #222;
+}
+
+.pizza-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This is the "magic" that fixes distorted images */
+}
+
+/* TEXT CONTENT INSIDE CARD */
+.pizza-info {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pizza-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.pizza-info p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* PRICE AND BUTTON ROW */
+.pizza-price-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ff9800;
+}
+
+.add-btn {
+  background: #ff9800;
+  color: #000;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-btn:hover {
+  background: #ffb84d;
+  transform: scale(1.05);
 }

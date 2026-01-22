@@ -1,6 +1,10 @@
-module.exports = (req, res, next) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ message: "Admin access only" });
-  }
-  next();
+const adminMiddleware = (req, res, next) => {
+    // req.user comes from your existing auth middleware
+    if (req.user && req.user.role === 'admin') {
+        next();
+    } else {
+        res.status(403).json({ message: "Access denied. Admin rights required." });
+    }
 };
+
+module.exports = adminMiddleware;

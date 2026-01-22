@@ -1,40 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ cart = [] }) {
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
+function Navbar({ user, setUser, cartCount }) {
+  const navigate = useNavigate();
 
-  const logout = () => {
-    localStorage.clear();
-    window.location.href = "/login";
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
   };
 
   return (
-    <nav style={{ display: "flex", gap: "15px", marginBottom: "20px" }}>
-      <Link to="/">Home</Link>
-
-      {role !== "admin" && <Link to="/">Cart ({cart.length})</Link>}
-
-      {!token ? (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </>
-      ) : (
-        <>
-          {role === "admin" && (
-            <>
-              <Link to="/admin">Admin Dashboard</Link>
-              <Link to="/admin/orders">Manage Orders</Link>
-              <Link to="/admin/pizzas">Manage Pizzas</Link>
-            </>
-          )}
-
-          {role !== "admin" && <Link to="/orders">My Orders</Link>}
-
-          <button onClick={logout}>Logout</button>
-        </>
-      )}
+    <nav className="navbar">
+      <Link to="/" className="logo">PizzaHouse 🍕</Link>
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        <Link to="/cart">Cart ({cartCount})</Link>
+        
+        {user ? (
+          <>
+            {user.role === "admin" && <Link to="/admin-dashboard">Admin</Link>}
+            <span className="user-name">Hi, {user?.name?.split(' ')[0] || 'User'}</span>
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 }

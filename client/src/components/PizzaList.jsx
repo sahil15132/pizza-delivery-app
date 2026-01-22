@@ -9,27 +9,30 @@ function PizzaList({ cart, setCart }) {
   }, []);
 
   const fetchPizzas = async () => {
-    const res = await fetch("http://localhost:5000/api/pizzas");
-    const data = await res.json();
-    setPizzas(data);
+    try {
+      const res = await fetch("http://localhost:5000/api/pizzas");
+      const data = await res.json();
+      setPizzas(data);
+    } catch (err) {
+      console.error("Error fetching pizzas:", err);
+    }
   };
 
-  return (
-    <div>
-      <h2>🍕 Available Pizzas</h2>
-
-      <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        {pizzas.map((pizza) => (
-          <PizzaCard
-            key={pizza._id}
-            pizza={pizza}
-            cart={cart}
-            setCart={setCart}
-          />
-        ))}
-      </div>
+return (
+  <div className="pizza-container">
+    <h1 className="main-title">🍕 Fresh From The Oven</h1>
+    <div className="pizza-grid">
+      {pizzas.map((pizza) => (
+        <PizzaCard 
+          key={pizza._id} 
+          pizza={pizza} 
+          cart={cart} 
+          setCart={setCart} 
+        />
+      ))}
     </div>
-  );
+  </div>
+);
 }
 
 export default PizzaList;

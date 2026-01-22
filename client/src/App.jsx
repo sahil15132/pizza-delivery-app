@@ -1,77 +1,51 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 
+// Components
 import Navbar from "./components/Navbar";
-import PizzaList from "./components/PizzaList";
-import Cart from "./components/Cart";
+import AdminRoute from "./components/AdminRoute";
+import PizzaList from "./components/PizzaList"; // This is your Home
+
+// Pages
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import MyOrders from "./pages/MyOrders";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Cart from "./pages/Cart";
 
-import AdminRoute from "./admin/AdminRoute";
+// Admin
 import AdminDashboard from "./admin/pages/AdminDashboard";
-import AdminUsers from "./admin/pages/AdminUsers";
-import AdminOrders from "./admin/pages/AdminOrders";
-import AdminPizzas from "./admin/pages/AdminPizzas";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser && savedUser !== "undefined") {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Navbar />
-
+    <Router>
+      <Navbar user={user} setUser={setUser} cartCount={cart.length} />
       <Routes>
-        {/* USER */}
-        <Route path="/" element={<PizzaList />} />
-        <Route path="/login" element={<Login />} />
+        {/* Set PizzaList as the root page */}
+        <Route path="/" element={<PizzaList cart={cart} setCart={setCart} />} />
+        
+        <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/register" element={<Register />} />
-
-        <Route
-          path="/orders"
-          element={
-            <ProtectedRoute>
-              <MyOrders />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* ADMIN */}
-        <Route
-          path="/admin"
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+        
+        <Route 
+          path="/admin-dashboard" 
           element={
             <AdminRoute>
               <AdminDashboard />
             </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/admin/users"
-          element={
-            <AdminRoute>
-              <AdminUsers />
-            </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/admin/orders"
-          element={
-            <AdminRoute>
-              <AdminOrders />
-            </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/admin/pizzas"
-          element={
-            <AdminRoute>
-              <AdminPizzas />
-            </AdminRoute>
-          }
+          } 
         />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
