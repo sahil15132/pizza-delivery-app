@@ -29,16 +29,38 @@ function Login({ setUser }) {
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={handleLogin} className="auth-card">
-        <h2>Login</h2>
-        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit" className="submit-btn">Login</button>
-        <p>New user? <Link to="/register">Register here</Link></p>
-      </form>
-    </div>
-  );
+  <div className="auth-container">
+    <form onSubmit={handleLogin} className="auth-card">
+      <h2>Login 🍕</h2>
+
+      <div className="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="email@example.com"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+
+      <button type="submit" className="submit-btn">Login</button>
+
+      <p className="auth-switch">
+        New user? <Link to="/register">Register here</Link>
+      </p>
+    </form>
+  </div>
+);
 }
 
 export default Login;

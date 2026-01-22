@@ -317,3 +317,45 @@ body {
   background: #ffb84d;
   transform: scale(1.05);
 }
+
+.auth-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(180deg, #222, #1a1a1a);
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: #777;
+}
+
+.form-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+}
+
+/* Login/Register switch text */
+.auth-switch {
+  margin-top: 18px;
+  text-align: center;
+  color: #aaa;
+}
+
+.auth-switch a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
