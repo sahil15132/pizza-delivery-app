@@ -10,7 +10,7 @@ Note: I scanned the project to prepare this README. If you want, I can also crea
 
 ---
 
-## Quick project summary (elevator pitch)
+## Quick project summary 
 
 A simple, realistic pizza delivery app demonstrating a full-stack flow:
 - User registration & login (JWT)
