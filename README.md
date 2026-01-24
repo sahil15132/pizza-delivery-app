@@ -1,36 +1,131 @@
-#  Pizza Delivery App (Backend)
+# Pizza Delivery App
 
-A REST API for a pizza delivery application built using Node.js, Express, and MongoDB.
+Full-stack Pizza Delivery application (frontend + backend).  
+Frontend: React + Vite. Backend: Node.js + Express + MongoDB (Mongoose).  
+This repository contains two main folders:
+- `client/` — React app (Vite)
+- `server/` — Express API + Mongoose models & seed script
 
-##  Features
-- User authentication (JWT)
-- Role-based access (Admin / User)
-- CRUD operations for pizzas
-- Place orders
-- View user orders
-- Secure routes with middleware
+Note: I scanned the project to prepare this README. If you want, I can also create an `env.example` file and a short GitHub Actions workflow.
 
-##  Tech Stack
-- Node.js
-- Express.js
-- MongoDB + Mongoose
-- JWT Authentication
-- Postman (API testing)
+---
 
-##  API Endpoints
+## Quick project summary (elevator pitch)
 
-### Auth
+A simple, realistic pizza delivery app demonstrating a full-stack flow:
+- User registration & login (JWT)
+- Role-based access control (admin / user)
+- Browse pizzas, add to cart, place orders
+- Admin dashboard to manage pizzas, users, orders, and view stats
+- Seed script to populate demo pizzas
+
+This is a great portfolio project to show full‑stack JavaScript skills — with a little polish (README, demo, deployment, tests) it becomes strong for internship applications.
+
+---
+
+## Tech stack
+
+- Frontend
+  - React (Vite)
+  - React Router
+  - Axios
+  - CSS (plain)
+  - ESLint config present (client/eslint.config.js)
+- Backend
+  - Node.js, Express
+  - MongoDB + Mongoose
+  - dotenv, cors
+  - JWT authentication (server routes + frontend axios usage)
+- Tools
+  - seedPizzas.js — seed demo pizza data
+  - Vite dev proxy configured to forward `/api` to backend
+
+---
+
+## Features
+
+- User registration & login (JWT)
+- Add pizzas to cart and place orders
+- View orders (user)
+- Admin: manage pizzas (CRUD), manage orders (update status), manage users (promote/demote/delete), view basic stats
+- Axios interceptor in client to automatically attach JWT from localStorage
+
+---
+
+## Quickstart — Run locally
+
+Prerequisites:
+- Node.js (16+ recommended)
+- npm or yarn
+- MongoDB (local or MongoDB Atlas)
+
+1. Clone the repo and install
+   - git clone <this-repo-url>
+   - cd pizza-delivery-app
+
+2. Backend (server)
+   - cd server
+   - npm install
+   - Create a `.env` file (see "Environment variables" below)
+   - Run the API:
+     - If you have a dev script (nodemon): npm run dev
+     - Or: node server.js
+   - Optional: seed demo pizzas
+     - node seedPizzas.js
+
+3. Frontend (client)
+   - cd ../client
+   - npm install
+   - Start dev server:
+     - npm run dev
+   - The Vite server is configured to proxy `/api` to `http://localhost:5000` (see client/vite.config.js). Open the dev URL Vite gives you (usually http://localhost:5173).
+
+Notes:
+- If the server runs on a different port, update the frontend base URLs or the proxy.
+- The frontend reads token/user from localStorage for auth state.
+
+---
+
+## Environment variables
+
+Create `server/.env` with at minimum:
+
+MONGO_URI=your-mongodb-connection-string
+PORT=5000
+JWT_SECRET=your_jwt_secret_key
+
+Example `.env` (do NOT commit real secrets):
+MONGO_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/pizza-demo?retryWrites=true&w=majority
+PORT=5000
+JWT_SECRET=change_this_to_a_secure_random_string
+
+(Optional) If you deploy, set the same environment variables in your hosting provider.
+
+---
+
+## API (summary)
+
+Auth
 - POST /api/auth/register
 - POST /api/auth/login
 
-### Pizzas
+Pizzas
 - GET /api/pizzas
 - POST /api/pizzas (Admin)
 - PUT /api/pizzas/:id (Admin)
 - DELETE /api/pizzas/:id (Admin)
 
-### Orders
+Orders
 - POST /api/orders
 - GET /api/orders/my
 
+Admin
+- GET /api/admin/orders
+- PATCH /api/admin/orders/:id
+- GET /api/admin/users
+- PATCH /api/admin/users/:id
+- GET /api/admin/stats
 
+(Use Authorization: Bearer <token> header for protected routes.)
+
+---
