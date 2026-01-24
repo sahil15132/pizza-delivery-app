@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-// Initialize app
 const app = express();
 
 // Middlewares
@@ -15,29 +14,36 @@ const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const pizzaRoutes = require("./routes/pizza.routes");
 const orderRoutes = require("./routes/order.routes");
-const adminRoutes = require("./routes/admin.routes"); // <-- add this
+const adminRoutes = require("./routes/admin.routes");
 
-app.use("/api/orders", orderRoutes);
+
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/pizzas", pizzaRoutes);
-app.use("/api/admin", adminRoutes); // <-- mount admin routes here
+app.use("/api/orders", orderRoutes);
+app.use("/api/admin", adminRoutes);
 
-// Test Route
 app.get("/", (req, res) => {
-  res.send("Pizza Delivery API is running 🍕");
+  res.status(200).send("Pizza Delivery API is running 🍕");
 });
 
+// Port (Railway assigns this dynamically)
+const PORT = process.env.PORT || 5000;
+
 // MongoDB Connection
-console.log("MONGO URI 👉", process.env.MONGO_URI);
+console.log("Connecting to MongoDB...");
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB Connected ✅");
-    app.listen(process.env.PORT || 5000, () => {
-      console.log("Server running on port 5000 🚀");
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT} 🚀`);
     });
   })
   .catch((err) => {
-    console.error("MongoDB Error ❌", err);
+    console.error("MongoDB Connection Failed ❌");
+    console.error(err.message);
+    process.exit(1); // stop app if DB fails
   });
