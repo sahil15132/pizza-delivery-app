@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
 });
 
 // MongoDB Connection
+console.log("MONGO URI 👉", process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
