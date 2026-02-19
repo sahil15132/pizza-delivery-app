@@ -1,28 +1,3 @@
-# Pizza Delivery App
-
-Full-stack Pizza Delivery application (frontend + backend).  
-Frontend: React + Vite. Backend: Node.js + Express + MongoDB (Mongoose).  
-This repository contains two main folders:
-- `client/` — React app (Vite)
-- `server/` — Express API + Mongoose models & seed script
-
-Note: I scanned the project to prepare this README. If you want, I can also create an `env.example` file and a short GitHub Actions workflow.
-
----
-
-## Quick project summary 
-
-A simple, realistic pizza delivery app demonstrating a full-stack flow:
-- User registration & login (JWT)
-- Role-based access control (admin / user)
-- Browse pizzas, add to cart, place orders
-- Admin dashboard to manage pizzas, users, orders, and view stats
-- Seed script to populate demo pizzas
-
-This is a great portfolio project to show full‑stack JavaScript skills — with a little polish (README, demo, deployment, tests) it becomes strong for internship applications.
-
----
-
 ## Tech stack
 
 - Frontend
