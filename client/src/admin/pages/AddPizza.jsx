@@ -11,7 +11,7 @@ function AddPizza() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://pizzahouse-a5kn.onrender.com", {
+      const response = await fetch("https://pizzahouse-a5kn.onrender.com/api/pizzas", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",

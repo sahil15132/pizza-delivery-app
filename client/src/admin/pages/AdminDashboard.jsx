@@ -8,7 +8,7 @@ function AdminDashboard() {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://pizzahouse-a5kn.onrender.com", {
+      const res = await axios.get("https://pizzahouse-a5kn.onrender.com/api/admin/stats", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(res.data || { totalRevenue: 0, totalOrders: 0 });
