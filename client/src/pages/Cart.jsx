@@ -27,7 +27,7 @@ const handleCheckout = async () => {
     console.log("SENDING ORDER:", orderData);
 
     const response = await axios.post(
-      "http://localhost:5000/api/orders",
+      "https://pizzahouse-a5kn.onrender.com/api/orders",
       orderData,
       { headers: { Authorization: `Bearer ${token}` } }
     );

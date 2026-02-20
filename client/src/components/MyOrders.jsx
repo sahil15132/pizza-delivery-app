@@ -11,7 +11,7 @@ function MyOrders() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch("http://localhost:5000/api/orders/my", {
+      const res = await fetch("https://pizzahouse-a5kn.onrender.com/api/orders/my", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

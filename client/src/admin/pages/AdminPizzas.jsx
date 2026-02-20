@@ -6,7 +6,7 @@ function AdminPizzas() {
   const [price, setPrice] = useState("");
 
   const fetchPizzas = () => {
-    fetch("http://localhost:5000/api/pizzas")
+    fetch("https://pizzahouse-a5kn.onrender.com/api/pizzas")
       .then(res => res.json())
       .then(data => setPizzas(data));
   };
@@ -14,7 +14,7 @@ function AdminPizzas() {
   useEffect(fetchPizzas, []);
 
   const addPizza = async () => {
-    await fetch("http://localhost:5000/api/pizzas", {
+    await fetch("https://pizzahouse-a5kn.onrender.com/api/pizzas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function AdminPizzas() {
   };
 
   const deletePizza = async (id) => {
-    await fetch(`http://localhost:5000/api/pizzas/${id}`, {
+    await fetch(`https://pizzahouse-a5kn.onrender.com/api/pizzas/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

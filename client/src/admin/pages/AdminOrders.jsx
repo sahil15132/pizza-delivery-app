@@ -10,7 +10,7 @@ function AdminOrders() {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/admin/orders", { // <-- admin endpoint
+      const res = await fetch("https://pizzahouse-a5kn.onrender.com/api/admin/orders", { // <-- admin endpoint
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -26,7 +26,7 @@ function AdminOrders() {
   const updateStatus = async (orderId, status) => {
     try {
       // call admin patch endpoint
-      await fetch(`http://localhost:5000/api/admin/orders/${orderId}`, {
+      await fetch(`https://pizzahouse-a5kn.onrender.com/api/admin/orders/${orderId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

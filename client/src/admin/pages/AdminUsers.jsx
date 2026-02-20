@@ -8,7 +8,7 @@ function AdminUsers() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/admin/users", {
+      const res = await axios.get("https://pizzahouse-a5kn.onrender.com/api/admin/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -23,7 +23,7 @@ function AdminUsers() {
 
   const updateRole = async (id, role) => {
     try {
-      await axios.patch(`http://localhost:5000/api/admin/users/${id}`, { role }, {
+      await axios.patch(`https://pizzahouse-a5kn.onrender.com/api/admin/users/${id}`, { role }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -37,7 +37,7 @@ function AdminUsers() {
   const deleteUser = async (id) => {
     if (!window.confirm("Delete this user? This cannot be undone.")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${id}`, {
+      await axios.delete(`https://pizzahouse-a5kn.onrender.com/api/admin/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();

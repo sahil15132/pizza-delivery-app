@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Pizza Delivery API is running 🍕");
 });
 
-// Port (Railway assigns this dynamically)
+
 const PORT = process.env.PORT || 5000;
 
 // MongoDB Connection
@@ -45,5 +45,5 @@ mongoose
   .catch((err) => {
     console.error("MongoDB Connection Failed ❌");
     console.error(err.message);
-    process.exit(1); // stop app if DB fails
+    process.exit(1); 
   });

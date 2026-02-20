@@ -10,7 +10,7 @@ function MyOrders() {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/orders/my",
+          "https://pizzahouse-a5kn.onrender.com/api/orders/my",
           {
             headers: {
               Authorization: `Bearer ${token}`,

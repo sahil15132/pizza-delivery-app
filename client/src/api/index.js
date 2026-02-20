@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://pizzahouse-a5kn.onrender.com/api",
 });
 
 // This interceptor mimics your Postman 'Authorization' tab automatically

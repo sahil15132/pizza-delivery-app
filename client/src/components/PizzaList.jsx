@@ -10,7 +10,7 @@ function PizzaList({ cart, setCart }) {
 
   const fetchPizzas = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/pizzas");
+      const res = await fetch("https://pizzahouse-a5kn.onrender.com/api/pizzas");
       const data = await res.json();
       setPizzas(data);
     } catch (err) {
